@@ -29,9 +29,9 @@ def find_HSU(img, h_cnt, s_cnt, u_cnt):
     contour, center = find_contour(img)
     if contour is None:
         return None, None
-    h_diff = find_contour(contour, h_cnt)
-    s_diff = find_contour(contour, s_cnt)
-    u_diff = find_contour(contour, u_cnt)
+    h_diff = find_diff(contour, h_cnt)
+    s_diff = find_diff(contour, s_cnt)
+    u_diff = find_diff(contour, u_cnt)
     min_diff = min([h_diff, s_diff, u_diff])
     diff_arg = np.argmin([h_diff, s_diff, u_diff])
     if min_diff > 0.4:
