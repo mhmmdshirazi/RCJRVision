@@ -5,7 +5,7 @@ import cv2 as cv
 # Finding the letter contour in the picture
 def find_contour(img):
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    ret, thresh = cv.threshold(imgray, 60, 255, 0)
+    ret, thresh = cv.threshold(imgray, 80, 255, 0)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     # Return None if there is no contour in picture
     if len(contours) == 0:
@@ -15,13 +15,15 @@ def find_contour(img):
     x, y, w, h = cv.boundingRect(cnt)
     center = [x + w / 2, y + h / 2]
     shifted_cnt = cnt - [x, y]
-    scaled_cnt = np.uint(shifted_cnt * 100 / h)
+    scaled_cnt = shifted_cnt
+    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * 100 / w)
+    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * 100 / h)
     return scaled_cnt, center
 
 
 # Find difference of contours
 def find_diff(cnt1, cnt2):
-    return cv.matchShapes(cnt1, cnt2, 2, 0)
+    return cv.matchShapes(cnt1, cnt2, 3, 0)
 
 
 # Find the HSU Letter in contuor
@@ -38,7 +40,8 @@ def find_HSU(img, h_cnt, s_cnt, u_cnt):
     # cv.drawContours(img,[h_cnt],0,(0,255,0),1)
     # cv.drawContours(img, [contour], 0, (0, 0, 255), 1)
     # cv.imshow('c',img)
-    cv.waitKey()
+    # cv.waitKey()
+    print(min_diff)
     if min_diff > 0.4:
         return None, None
     if diff_arg == 0:

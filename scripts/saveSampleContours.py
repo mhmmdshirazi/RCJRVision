@@ -4,12 +4,12 @@ import cv2 as cv
 from numpy import save
 import contours
 
-img = cv.imread('../test data/a.jpg')
+img = cv.imread('../test data/u.jpg')
 cnt, center = contours.find_contour(img)
 
 cv.drawContours(img, [cnt], 0 , (0,255,0),1)
 
-save('../Contours/H_contour.npy',cnt)
+save('../Contours/U_contour.npy', cnt)
 cv.imshow('result', img)
 
 cv.waitKey()
