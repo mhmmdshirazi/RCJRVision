@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-from scripts.params import *
+from params import *
 
 
 # Finding the letter contour in the picture
