@@ -21,8 +21,8 @@ def find_contour(img):
     center = [x + w / 2, y + h / 2]
     shifted_cnt = cnt - [x, y]
     scaled_cnt = shifted_cnt
-    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * 100 / w)
-    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * 100 / h)
+    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * scaled_cnt_coef / w)
+    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * scaled_cnt_coef / h)
     return scaled_cnt, center
 
 
