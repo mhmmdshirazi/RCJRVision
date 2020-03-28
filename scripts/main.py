@@ -2,7 +2,7 @@
 """
 from numpy import load
 import cv2 as cv
-from contours import *
+from contours import find_HSU
 import time
 import os
 
