@@ -2,21 +2,21 @@
 """
 from numpy import load
 import cv2 as cv
-from contours import find_HSU
+from contours import find_HSU, img_dir
 import time
 import os
 
 # Load contours
-h_cnt = load('../Contours/H_contour.npy')
-s_cnt = load('../Contours/S_contour.npy')
-u_cnt = load('../Contours/U_contour.npy')
-img_dir = '../test data'
+# h_cnt = load('../Contours/H_contour.npy')
+# s_cnt = load('../Contours/S_contour.npy')
+# u_cnt = load('../Contours/U_contour.npy')
+# img_dir = '../test data'
 # test method using
 for filename in os.listdir(img_dir):
     if filename.endswith(".jpg"):
         img = cv.imread(os.path.join(img_dir, filename))
         print('Analysing pic {} ...'.format(filename))
-        letter, center = find_HSU(img, h_cnt, s_cnt, u_cnt)
+        letter, center = find_HSU(img)
         print('         ... Pic {0} contains {1} letter'.format(filename, letter))
 
 # img = cv.imread('../test data/u5.jpg')
