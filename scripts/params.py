@@ -15,4 +15,4 @@ area_lower_bound = 200
 area_upper_bound = 2000
 
 match_alg = 3
-match_thr = 0.4
+match_thr = 0.7
