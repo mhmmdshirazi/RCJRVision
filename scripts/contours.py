@@ -1,33 +1,38 @@
 import numpy as np
 import cv2 as cv
+from params import *
 
 
 # Finding the letter contour in the picture
 def find_contour(img):
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    ret, thresh = cv.threshold(imgray, 80, 255, 0)
+    ret, thresh = cv.threshold(imgray, cv_lower_thr, cv_upper_thr, 0)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     # Return None if there is no contour in picture
     if len(contours) == 0:
         return None, None
     areas = [cv.contourArea(cnt) for cnt in contours]
+    print('         ... Containing areas are:', areas)
+    if not np.any(np.logical_and(np.array(areas) < area_upper_bound, np.array(areas) > area_lower_bound)):
+        return None, None
+
     cnt = contours[np.argmin(areas)]
     x, y, w, h = cv.boundingRect(cnt)
     center = [x + w / 2, y + h / 2]
     shifted_cnt = cnt - [x, y]
     scaled_cnt = shifted_cnt
-    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * 100 / w)
-    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * 100 / h)
+    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * scaled_cnt_coef / w)
+    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * scaled_cnt_coef / h)
     return scaled_cnt, center
 
 
 # Find difference of contours
 def find_diff(cnt1, cnt2):
-    return cv.matchShapes(cnt1, cnt2, 3, 0)
+    return cv.matchShapes(cnt1, cnt2, match_alg, 0)
 
 
 # Find the HSU Letter in contuor
-def find_HSU(img, h_cnt, s_cnt, u_cnt):
+def find_HSU(img):
     contour, center = find_contour(img)
     if contour is None:
         return None, None
@@ -41,8 +46,8 @@ def find_HSU(img, h_cnt, s_cnt, u_cnt):
     # cv.drawContours(img, [contour], 0, (0, 0, 255), 1)
     # cv.imshow('c',img)
     # cv.waitKey()
-    print(min_diff)
-    if min_diff > 0.4:
+    print('         ... diff to ref is:', min_diff)
+    if min_diff > match_thr:
         return None, None
     if diff_arg == 0:
         return 'H', center
