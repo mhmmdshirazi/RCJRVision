@@ -1,9 +1,7 @@
 """ This Code is an Example of finding H U and S letters in Pictures
 """
-from numpy import load
 import cv2 as cv
 from contours import find_HSU, img_dir
-import time
 import os
 
 # test method using
