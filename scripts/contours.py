@@ -11,6 +11,10 @@ def find_contour(img):
     if len(contours) == 0:
         return None, None
     areas = [cv.contourArea(cnt) for cnt in contours]
+    print('         ... Containing areas are:', areas)
+    if not np.any(np.logical_and(np.array(areas) < 2000, np.array(areas) > 200)):
+        return None, None
+
     cnt = contours[np.argmin(areas)]
     x, y, w, h = cv.boundingRect(cnt)
     center = [x + w / 2, y + h / 2]
@@ -41,7 +45,7 @@ def find_HSU(img, h_cnt, s_cnt, u_cnt):
     # cv.drawContours(img, [contour], 0, (0, 0, 255), 1)
     # cv.imshow('c',img)
     # cv.waitKey()
-    print(min_diff)
+    print('         ... diff to ref is:', min_diff)
     if min_diff > 0.4:
         return None, None
     if diff_arg == 0:
