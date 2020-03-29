@@ -4,7 +4,7 @@ from params import *
 
 
 # Finding the letter contour in the picture
-def find_contour(img):
+def find_contour(img, verbose):
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     ret, thresh = cv.threshold(imgray, cv_lower_thr, cv_upper_thr, 0)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
@@ -12,7 +12,8 @@ def find_contour(img):
     if len(contours) == 0:
         return None, None
     areas = [cv.contourArea(cnt) for cnt in contours]
-    print('         ... Containing areas are:', areas)
+    if verbose:
+        print('         ... Containing areas are:', areas)
     if not np.any(np.logical_and(np.array(areas) < area_upper_bound, np.array(areas) > area_lower_bound)):
         return None, None
 
@@ -32,8 +33,8 @@ def find_diff(cnt1, cnt2):
 
 
 # Find the HSU Letter in contuor
-def find_HSU(img):
-    contour, center = find_contour(img)
+def find_HSU(img, verbose):
+    contour, center = find_contour(img, verbose)
     if contour is None:
         return None, None
     h_diff = find_diff(contour, h_cnt)
@@ -46,7 +47,8 @@ def find_HSU(img):
     # cv.drawContours(img, [contour], 0, (0, 0, 255), 1)
     # cv.imshow('c',img)
     # cv.waitKey()
-    print('         ... diff to ref is:', min_diff)
+    if verbose:
+        print('         ... diff to ref is:', min_diff)
     if min_diff > match_thr:
         return None, None
     if diff_arg == 0:
