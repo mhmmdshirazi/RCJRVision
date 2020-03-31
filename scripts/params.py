@@ -1,7 +1,7 @@
 from numpy import load
 
 # Pre-captured Contours
-h_cnt = load('/Contours/H_contour.npy')
+h_cnt = load('Contours/H_contour.npy')
 s_cnt = load('../Contours/S_contour.npy')
 u_cnt = load('../Contours/U_contour.npy')
 # Test Data location
