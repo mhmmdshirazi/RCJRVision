@@ -25,7 +25,7 @@ https://docs.opencv.org/master/d3/dc0/group__imgproc__shape.html#gaf2b97a230b518
 """
 match_alg = 3
 # Matching Threshold
-match_thr = 1.4
+match_thr = 1.5
 
 # Debug mode flag
 verbose = True
