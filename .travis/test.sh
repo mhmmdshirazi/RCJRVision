@@ -8,4 +8,4 @@
   then
 	PYTHON_COMMAND=python3
   fi
-  $PYTHON_COMMAND -m main.py
+  $PYTHON_COMMAND -m scripts/main.py
