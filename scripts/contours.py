@@ -5,8 +5,8 @@ import params
 
 # Finding the letter contour in the picture
 def find_contour(img, verbose):
-    imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    ret, thresh = cv.threshold(imgray, params.cv_lower_thr, params.cv_upper_thr, 0)
+    img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    ret, thresh = cv.threshold(img_gray, params.cv_lower_thr, params.cv_upper_thr, 0)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     # Return None if there is no contour in picture
     if len(contours) == 0:
