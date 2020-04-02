@@ -240,7 +240,7 @@ u_cnt = np.array([[0, 1],
                  )
 u_cnt = u_cnt.reshape((u_cnt.shape[0], 1, u_cnt.shape[1]))
 # Test Data location
-img_dir = '../test data'
+test_img_dir = '../test data'
 
 # Open cv threshold values for making a binary from gray scaled picture
 cv_lower_thr = 80
