@@ -1,10 +1,8 @@
 from numpy import load
 import numpy as np
-from numpy.core._multiarray_umath import ndarray
-
 # Pre-captured Contours
 
-h_cnt: ndarray = np.array([[1, 0],
+h_cnt: np.ndarray = np.array([[1, 0],
                            [0, 1],
                            [17, 0],
                            [19, 1],
@@ -26,7 +24,7 @@ h_cnt: ndarray = np.array([[1, 0],
                            [0, 96]])
 h_cnt = h_cnt.reshape((h_cnt.shape[0], 1, h_cnt.shape[1]))
 
-s_cnt: ndarray = np.array([[34, 1],
+s_cnt: np.ndarray = np.array([[34, 1],
                            [36, 0],
                            [63, 0],
                            [65, 1],
@@ -164,7 +162,7 @@ s_cnt: ndarray = np.array([[34, 1],
                            [28, 1]])
 s_cnt = s_cnt.reshape((s_cnt.shape[0], 1, s_cnt.shape[1]))
 
-u_cnt: ndarray = np.array([[0, 1],
+u_cnt: np.ndarray = np.array([[0, 1],
                            [1, 0],
                            [16, 0],
                            [18, 1],
