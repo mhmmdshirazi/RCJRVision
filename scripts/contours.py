@@ -1,12 +1,12 @@
 import numpy as np
 import cv2 as cv
-from params import *
+import params
 
 
 # Finding the letter contour in the picture
 def find_contour(img, verbose):
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    ret, thresh = cv.threshold(imgray, cv_lower_thr, cv_upper_thr, 0)
+    ret, thresh = cv.threshold(imgray, params.cv_lower_thr, params.cv_upper_thr, 0)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     # Return None if there is no contour in picture
     if len(contours) == 0:
@@ -14,7 +14,7 @@ def find_contour(img, verbose):
     areas = [cv.contourArea(cnt) for cnt in contours]
     if verbose:
         print('         ... Containing areas are:', areas)
-    if not np.any(np.logical_and(np.array(areas) < area_upper_bound, np.array(areas) > area_lower_bound)):
+    if not np.any(np.logical_and(np.array(areas) < params.area_upper_bound, np.array(areas) > params.area_lower_bound)):
         return None, None
 
     cnt = contours[np.argmin(areas)]
@@ -22,18 +22,18 @@ def find_contour(img, verbose):
     center = [x + w / 2, y + h / 2]
     shifted_cnt = cnt - [x, y]
     scaled_cnt = shifted_cnt
-    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * scaled_cnt_coef / w)
-    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * scaled_cnt_coef / h)
+    scaled_cnt[:, :, 0] = np.uint(shifted_cnt[:, :, 0] * params.scaled_cnt_coef / w)
+    scaled_cnt[:, :, 1] = np.uint(shifted_cnt[:, :, 1] * params.scaled_cnt_coef / h)
     return scaled_cnt, center
 
 
 # Find difference of contours
 def find_diff(cnt1, cnt2):
-    return cv.matchShapes(cnt1, cnt2, match_alg, 0)
+    return cv.matchShapes(cnt1, cnt2, params.match_alg, 0)
 
 
 # Find the HSU Letter in contuor
-def find_HSU(img, verbose):
+def find_HSU(img, verbose, h_cnt, s_cnt, u_cnt):
     contour, center = find_contour(img, verbose)
     if contour is None:
         return None, None
@@ -49,7 +49,7 @@ def find_HSU(img, verbose):
     # cv.waitKey()
     if verbose:
         print('         ... diff to ref is:', min_diff)
-    if min_diff > match_thr:
+    if min_diff > params.match_thr:
         return None, None
     if diff_arg == 0:
         return 'H', center

@@ -33,4 +33,4 @@ class HSUVision:
             raise TypeError('u_cnt can be only a numpy ndarray or an path to .npy file')
 
     def find_HSU(self, img, verbose=params.verbose):
-        return contours.find_HSU(img, verbose)
+        return contours.find_HSU(img, verbose, h_cnt=self.h_cnt, s_cnt=self.s_cnt, u_cnt=self.u_cnt)
