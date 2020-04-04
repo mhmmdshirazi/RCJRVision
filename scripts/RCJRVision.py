@@ -3,6 +3,7 @@
 import contours
 import numpy
 import params
+import msgs
 
 
 class HSUVision:
@@ -14,11 +15,11 @@ class HSUVision:
 
     def __init__(self, contours_dict= {'H': params.h_cnt, 'S': params.s_cnt, 'U': params.u_cnt}):
         if not isinstance(contours_dict, dict):
-            raise TypeError('A dictionary is expected but get something else as input')
+            raise TypeError(msgs.ref_contours_type_error)
         _cnts_dict = contours_dict.copy()
         for name, contour in _cnts_dict.items():
             if not ((isinstance(contour, str) and contour[-4:] == '.npy') or isinstance(contour, numpy.ndarray)):
-                raise TypeError('Contours can be only a numpy ndarray or a path to .npy file')
+                raise TypeError(msgs.ref_contour_type_error)
             elif isinstance(contour, str) and contour[-4:] == '.npy':
                 _cnts_dict[name] = numpy.load(contour)
         self.ref_contours = _cnts_dict.copy()
