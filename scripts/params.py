@@ -262,5 +262,3 @@ match_alg = 3
 # Matching Threshold
 match_thr = 1.5
 
-# Debug mode flag
-verbose = True

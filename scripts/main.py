@@ -1,14 +1,13 @@
 """ This Code is an Example of finding H U and S letters in Pictures
 """
 import cv2 as cv
-import params
 import os
 import sys
 import RCJRVision
 import time
 
 
-def main(verbose=params.verbose):
+def main(verbose=False, test_img_dir='../test data'):
     start = time.time()
     """ There are three ways to use pre-defined comparable contours
            1. Use default saved contours from params
@@ -18,10 +17,10 @@ def main(verbose=params.verbose):
                 E.g. RCJRVision.HSUVision(h_cnt = my_ndarray)
     """
     my_test_vision = RCJRVision.HSUVision()
-    # To use your image files just change the params.test_img_dir with your image dir
-    for filename in os.listdir(params.test_img_dir):
+    # To use your image files just change the test_img_dir with your image dir at the input of the file
+    for filename in os.listdir(test_img_dir):
         if filename.endswith(".jpg"):
-            img = cv.imread(os.path.join(params.test_img_dir, filename))
+            img = cv.imread(os.path.join(test_img_dir, filename))
             if verbose:
                 print('Analysing pic {} ...'.format(filename))
             letter, center = my_test_vision.find_HSU(img, verbose)
@@ -35,7 +34,7 @@ def main(verbose=params.verbose):
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         main()
-    elif len(sys.argv) == 2 and sys.argv[1].lower() in ['true', 'false']:
-        main(eval(sys.argv[1].upper()[0] + sys.argv[1].lower()[1:]))
+    elif len(sys.argv) == 2 and sys.argv[1].lower() == '--verbose':
+        main(verbose=True)
     else:
         raise ValueError('Expect a True or False but but something else is passed as input')
