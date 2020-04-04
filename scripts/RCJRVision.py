@@ -19,7 +19,7 @@ class HSUVision:
         for name, contour in _cnts_dict.items():
             if not ((isinstance(contour, str) and contour[-4:] == '.npy') or isinstance(contour, numpy.ndarray)):
                 raise TypeError('Contours can be only a numpy ndarray or a path to .npy file')
-            elif isinstance(contour, str) and '.npy' in contour:
+            elif isinstance(contour, str) and contour[-4:] == '.npy':
                 _cnts_dict[name] = numpy.load(contour)
         self.ref_contours = _cnts_dict.copy()
 
