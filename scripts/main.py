@@ -7,7 +7,7 @@ import RCJRVision
 import time
 
 
-def main(verbose=False, test_img_dir='../test data'):
+def main(verbose=True, test_img_dir='../test data'):
     start = time.time()
     """ There are three ways to use pre-defined comparable contours
            1. Use default saved contours from params
@@ -28,7 +28,8 @@ def main(verbose=False, test_img_dir='../test data'):
                 print('         ... Pic {0} contains {1} letter'.format(filename, letter))
                 print('         ... Pic {0} letter location is {1}'.format(filename, center))
     end = time.time()
-    print('Test code took {0} ms'.format((end - start) * 1000))
+    if verbose:
+        print('Test code took {0} ms'.format((end - start) * 1000))
 
 
 if __name__ == '__main__':
