@@ -33,27 +33,25 @@ def find_diff(cnt1, cnt2):
 
 
 # Find the HSU Letter in contuor
-def find_HSU(img, verbose, h_cnt, s_cnt, u_cnt):
+def find_HSU(img, verbose, ref_contours):
     contour, center = find_contour(img, verbose)
     if contour is None:
         return None, None
-    h_diff = find_diff(contour, h_cnt)
-    s_diff = find_diff(contour, s_cnt)
-    u_diff = find_diff(contour, u_cnt)
-    min_diff = min([h_diff, s_diff, u_diff])
-    diff_arg = np.argmin([h_diff, s_diff, u_diff])
+    min_diff = 10*params.match_thr
+    extracted_ref = None
+    for name, ref_cnt in ref_contours.items():
+        diff = find_diff(contour, ref_cnt)
+        if diff < min_diff:
+            min_diff = diff
+            extracted_ref = name
+
     # debug
     # cv.drawContours(img,[h_cnt],0,(0,255,0),1)
     # cv.drawContours(img, [contour], 0, (0, 0, 255), 1)
     # cv.imshow('c',img)
     # cv.waitKey()
-    if verbose:
-        print('         ... diff to ref is:', min_diff)
     if min_diff > params.match_thr:
         return None, None
-    if diff_arg == 0:
-        return 'H', center
-    elif diff_arg == 1:
-        return 'S', center
-    else:
-        return 'U', center
+    if verbose:
+        print('         ... diff to ref is:', min_diff)
+    return extracted_ref, center

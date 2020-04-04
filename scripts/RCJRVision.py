@@ -12,25 +12,16 @@ class HSUVision:
         3. Numpy ndarrays with (n,1,2) shape (n is the number of contour points)
     """
 
-    def __init__(self, h_cnt=params.h_cnt, s_cnt=params.s_cnt, u_cnt=params.u_cnt):
-        if isinstance(h_cnt, str) and '.npy' in h_cnt:
-            self.h_cnt = numpy.load(h_cnt)
-        elif isinstance(h_cnt, numpy.ndarray):
-            self.h_cnt = h_cnt
-        else:
-            raise TypeError('h_cnt can be only a numpy ndarray or an path to .npy file')
-        if isinstance(s_cnt, str) and '.npy' in s_cnt:
-            self.s_cnt = numpy.load(s_cnt)
-        elif isinstance(s_cnt, numpy.ndarray):
-            self.s_cnt = s_cnt
-        else:
-            raise TypeError('s_cnt can be only a numpy ndarray or an path to .npy file')
-        if isinstance(u_cnt, str) and '.npy' in u_cnt:
-            self.u_cnt = numpy.load(u_cnt)
-        elif isinstance(u_cnt, numpy.ndarray):
-            self.u_cnt = u_cnt
-        else:
-            raise TypeError('u_cnt can be only a numpy ndarray or an path to .npy file')
+    def __init__(self, contours_dict= {'H': params.h_cnt, 'S': params.s_cnt, 'U': params.u_cnt}):
+        if not isinstance(contours_dict, dict):
+            raise TypeError('A dictionary is expected but get something else as input')
+        _cnts_dict = contours_dict.copy()
+        for name, contour in _cnts_dict.items():
+            if not ((isinstance(contour, str) and contour[-4:] == '.npy') or isinstance(contour, numpy.ndarray)):
+                raise TypeError('Contours can be only a numpy ndarray or a path to .npy file')
+            elif isinstance(contour, str) and '.npy' in contour:
+                _cnts_dict[name] = numpy.load(contour)
+        self.ref_contours = _cnts_dict.copy()
 
     def find_HSU(self, img, verbose=False):
-        return contours.find_HSU(img, verbose, h_cnt=self.h_cnt, s_cnt=self.s_cnt, u_cnt=self.u_cnt)
+        return contours.find_HSU(img, verbose, ref_contours=self.ref_contours)
