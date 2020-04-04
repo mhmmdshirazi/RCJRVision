@@ -44,7 +44,6 @@ def find_HSU(img, verbose, ref_contours):
         if diff < min_diff:
             min_diff = diff
             extracted_ref = name
-
     # debug
     # cv.drawContours(img,[h_cnt],0,(0,255,0),1)
     # cv.drawContours(img, [contour], 0, (0, 0, 255), 1)
