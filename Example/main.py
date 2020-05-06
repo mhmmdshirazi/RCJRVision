@@ -3,11 +3,14 @@
 import cv2 as cv
 import os
 import sys
-import RCJRVision
 import time
 
+sys.path.append('../scripts')
+sys.path.append('scripts')
+import RCJRVision
 
-def main(verbose=True, test_img_dir='../test data'):
+
+def main(verbose=True, test_img_dir='test data'):
     start = time.time()
     """ There are three ways to use pre-defined comparable contours
         1. Use default saved contours from params
