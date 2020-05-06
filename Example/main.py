@@ -5,7 +5,6 @@ import os
 import sys
 import time
 
-sys.path.append('../scripts')
 sys.path.append('scripts')
 import RCJRVision
 
