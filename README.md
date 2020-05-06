@@ -4,15 +4,19 @@
 2. [Instalation](#Installation)
 3. [Usage](#Usage)
 4. [Dependencies](#Dependencies)
-##Overview
+
+
+## Overview
 RCJRVision is a fast and simple method for **Robocup** Junior rescue maze and Robocup Junior Rescue simulation leagues
 to Detect H, S, and U Letters in an image.
 This package converts raw image to a solid black and white image, finds contours in the picture, chooses the most proper
 contour, and finally check it with pre defined letter contours to find the best match.
-##Instalation
 
-##Usage
-####Use with predefined contours
+
+## Instalation
+
+## Usage
+#### Use with predefined contours
 1. Import **RCJRVision**
 2. Make an object from HSUVision Class<br />
 `my_vision = RCJRVision.HSUVision()`<br />
@@ -25,7 +29,7 @@ This method returns two variables:<br/>
     In this case: 'H' or 'S' or 'U'<br/>
     2.center: <br>
     A 2 element list that represent the center of discover contour
-##Dependencies
+## Dependencies
 Click on the link below to see dependencies and their status:
 
 [![Requirements Status](https://requires.io/github/mhmmdshirazi/RCJRVision/requirements.svg?branch=master)](https://requires.io/github/mhmmdshirazi/RCJRVision/requirements/?branch=master)
