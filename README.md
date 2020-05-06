@@ -29,11 +29,14 @@ contour, and finally check it with pre defined letter contours to find the best 
 
 `letter, center = my_test_vision.find_HSU(img)`
 
-This method returns two variables:<br/>
-    - letter:<br>
-    >Key of the predefined contour dictionary.<br>
-    In this case: 'H' or 'S' or 'U'<br/>
-    - center: <br>
+This method returns two variables:
+
+- letter:
+
+    >Key of the predefined contour dictionary.
+    In this case: 'H' or 'S' or 'U'
+- center: 
+
     >A 2 element list that represent the center of discover contour
 ## Dependencies
 Click on the link below to see dependencies and their status:
