@@ -18,17 +18,23 @@ contour, and finally check it with pre defined letter contours to find the best 
 ## Usage
 #### Use with predefined contours
 1. Import **RCJRVision**
-2. Make an object from HSUVision Class<br />
-`my_vision = RCJRVision.HSUVision()`<br />
+
+2. Make an object from HSUVision Class
+
+`my_vision = RCJRVision.HSUVision()`
+
 3. Convert your image to an opencv image
-4. Use find_HSU method<br />
-`letter, center = my_test_vision.find_HSU(img)`<br />
+
+4. Use find_HSU method
+
+`letter, center = my_test_vision.find_HSU(img)`
+
 This method returns two variables:<br/>
-    1.letter:<br>
-    Key of the predefined contour dictionary.<br>
+    - letter:<br>
+    >Key of the predefined contour dictionary.<br>
     In this case: 'H' or 'S' or 'U'<br/>
-    2.center: <br>
-    A 2 element list that represent the center of discover contour
+    - center: <br>
+    >A 2 element list that represent the center of discover contour
 ## Dependencies
 Click on the link below to see dependencies and their status:
 
