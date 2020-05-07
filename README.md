@@ -15,9 +15,15 @@ contour, and finally check it with pre defined letter contours to find the best 
 
 ## Instalation
 
+Best way is to use pip:
+
+`pip install RCJRVision`
+
 ## Usage
 #### Use with predefined contours
 1. Import **RCJRVision**
+
+`from RCJRVision import RCJRVision`
 
 2. Make an object from HSUVision Class
 
