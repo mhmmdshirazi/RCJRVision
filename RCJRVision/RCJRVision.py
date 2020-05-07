@@ -1,9 +1,10 @@
 """ HSUVision Class
 """
-import contours
+import sys
 import numpy
-import params
-import msgs
+from .params import *
+from .msgs import *
+from .contours import *
 
 
 class HSUVision:
@@ -15,16 +16,16 @@ class HSUVision:
         3. Numpy ndarrays with (n,1,2) shape (n is the number of contour points)
     """
 
-    def __init__(self, contours_dict= {'H': params.h_cnt, 'S': params.s_cnt, 'U': params.u_cnt}):
+    def __init__(self, contours_dict= {'H': h_cnt, 'S': s_cnt, 'U': u_cnt}):
         if not isinstance(contours_dict, dict):
-            raise TypeError(msgs.ref_contours_type_error)
+            raise TypeError(ref_contours_type_error)
         _cnts_dict = contours_dict.copy()
         for name, contour in _cnts_dict.items():
             if not ((isinstance(contour, str) and contour[-4:] == '.npy') or isinstance(contour, numpy.ndarray)):
-                raise TypeError(msgs.ref_contour_type_error)
+                raise TypeError(ref_contour_type_error)
             elif isinstance(contour, str) and contour[-4:] == '.npy':
                 _cnts_dict[name] = numpy.load(contour)
         self.ref_contours = _cnts_dict.copy()
 
     def find_HSU(self, img, verbose=False):
-        return contours.find_HSU(img, verbose, ref_contours=self.ref_contours)
+        return find_HSU(img, verbose, ref_contours=self.ref_contours)

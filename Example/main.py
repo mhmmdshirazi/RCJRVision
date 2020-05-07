@@ -4,9 +4,8 @@ import cv2 as cv
 import os
 import sys
 import time
-
-sys.path.append('../RCJRVision')
-import RCJRVision
+#
+# import RCJRVision
 
 
 def main(verbose=True, test_img_dir='test data'):

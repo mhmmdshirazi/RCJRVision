@@ -21,7 +21,7 @@ setup(
     # $ pip install RCJRVision
     # where it will live on PyPI: https://pypi.org/project/RCJRVision/
     name='RCJRVision',
-    version='1.1',
+    version='1.5',
     description='A fast and simple image processing method to detect H S U victims in rescue maze',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -39,7 +39,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
     ],
-    packages=['scripts'],
+    packages=['RCJRVision'],
     python_requires='>=3.5, <4',
     install_requires=get_requires(),
 )
