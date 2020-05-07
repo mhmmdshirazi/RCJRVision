@@ -11,4 +11,5 @@ then
 fi
 
 $PIP_COMMAND install -r requirements.txt
+$PIP_COMMAND install RCJRVision
 
